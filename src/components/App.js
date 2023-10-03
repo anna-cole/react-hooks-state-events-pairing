@@ -1,20 +1,25 @@
+import React, {useState} from "react";
 import video from "../data/video.js";
+import Video from "./Video.js";
+import VideoDetails from "./VideoDetails.js";
+import Comments from "./Comments";
 
 function App() {
-  console.log("Here's your data:", video);
+  //console.log("Here's your data:", video);
+  let [hideComments, setHideComments] = useState('Hide Comments')
+
+  function toggleHideComments() {
+    hideComments = !hideComments
+    setHideComments(hideComments)
+  }
 
   return (
-    <div className="App">
-      <iframe
-        width="919"
-        height="525"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        frameBorder="0"
-        allowFullScreen
-        title="Thinking in React"
-      />
-    </div>
-  );
+   <div className="App">
+    <Video video={video}/>
+    <VideoDetails video={video} onClickButton={toggleHideComments} hideComments={hideComments}/>
+    <Comments video={video}/>
+   </div>
+  )
 }
 
 export default App;
